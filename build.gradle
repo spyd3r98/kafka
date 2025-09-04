@@ -38,6 +38,7 @@ plugins {
   id 'org.owasp.dependencycheck' version '8.2.1'
   id 'org.nosphere.apache.rat' version "0.8.1"
   id "io.swagger.core.v3.swagger-gradle-plugin" version "${swaggerVersion}"
+  id "org.sonarqube" version "6.3.1.5724"
 
   id "com.github.spotbugs" version '6.0.25' apply false
   id 'org.scoverage' version '8.0.3' apply false
@@ -3844,4 +3845,11 @@ task aggregatedJavadoc(type: Javadoc, dependsOn: compileJava) {
   classpath = files(projectsWithJavadoc.collect { it.sourceSets.main.compileClasspath })
   includes = projectsWithJavadoc.collectMany { it.javadoc.getIncludes() }
   excludes = projectsWithJavadoc.collectMany { it.javadoc.getExcludes() }
+}
+
+sonar {
+  properties {
+    property "sonar.projectKey", "spyd3r98_kafka"
+    property "sonar.organization", "spyd3r98"
+  }
 }
